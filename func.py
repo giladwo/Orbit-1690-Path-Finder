@@ -1,2 +1,3 @@
 a = raw_input()
-print(a)
+print("****" + a + "******")
+

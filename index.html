@@ -50,7 +50,28 @@
                 <h3 class="panel-title">Parameters</h3>
               </div>
               <div class="panel-body">
-                Body
+              	<table class="table-condensed">
+              		<tbody>
+              			<tr>
+		                	<td>polinum</td><td><input class="form-control form-control-small" type='number' placeholder="" id="polinum" value=3 ></td>
+		                </tr>
+		                <tr>
+		                	<td>position cost</td><td><input class="form-control form-control-small" type='number' placeholder="" id="position" value=60000 ></td>
+		                </tr>
+		                <tr>
+		                	<td>angle cost</td><td><input class="form-control form-control-small" type='number' placeholder="" id="angle" value=6000 ></td>
+		                </tr>
+		                <tr>
+		                	<td>radius cost</td><td><input class="form-control form-control-small" type='number' placeholder="" id="radius" value=50 ></td>
+		                </tr>
+		                <tr>
+		                	<td>radius continues cost</td><td><input class="form-control form-control-small" type='number' placeholder="" id="radius_cont" value=10 ></td>
+		                </tr>
+		                <tr>
+		                	<td>length cost</td><td><input class="form-control form-control-small" type='number' placeholder="" id="length" value=0 ></td>
+		                </tr>
+              		</tbody>
+              	</table>
               </div>
             </div>
         </div>
@@ -79,9 +100,9 @@
                         <tbody  id="points">
                             <tr class="point move-cursor" class="point">
                                 <!-- <td><i class="glyphicon glyphicon-minus" style="float: left; padding-top: 7px; color: #8c8c8c; margin-right: 10px"></i></td> -->   
-                                <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()"></td>
-                                <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()"></td>
-                                <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()"></td>
+                                <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()" value=0 ></td>
+                                <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()" value=0 ></td>
+                                <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()" value=0 ></td>
                                 <td class='reverse'><label class="toggle"><input type="checkbox" value="true" checked><span class="handle"></span></label></td>
                                 <td class='delete'><a class="btn btn-danger btn-small"
                                     onclick='delete_point(this)'>
@@ -90,9 +111,9 @@
                             </tr>
                             <tr class="point move-cursor" class="point">
                                 <!-- <td><i class="glyphicon glyphicon-minus" style="float: left; padding-top: 7px; color: #8c8c8c; margin-right: 10px"></i></td> -->   
-                                <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()"></td>
-                                <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()"></td>
-                                <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()"></td>
+                                <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()" value=5 ></td>
+                                <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()" value=5 ></td>
+                                <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()" value=0 ></td>
                                 <td class='reverse'><label class="toggle"><input type="checkbox" value="true" checked><span class="handle"></span></label></td>
                                 <td class='delete'><a class="btn btn-danger btn-small"
                                     onclick='delete_point(this)'>

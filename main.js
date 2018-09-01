@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
-const python_script = "./func.py";
-var data = "aa";
+const python_script = "path_finder.py";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -56,17 +55,32 @@ const http = require('http');
 const server = http.createServer((req, res) => {
     if (req.method === 'POST') {
         // Handle post info...
-        var PythonShell = require('python-shell');
-        var pyshell = new PythonShell(python_script);
-        pyshell.send('hello');
-
-        pyshell.on('message', function (message) {
-          // received a message sent from the Python script (a simple "print" statement)
-          //console.log(message);
-          res.end(data);
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // convert Buffer to string
         });
+        req.on('end', () => {
+            var input = decodeURIComponent(body).split("=")[1];
+            console.log(input);
 
-        pyshell.end(function (err,code,signal) {if (err) throw err;});
+            var PythonShell = require('python-shell');
+            var options = {
+              mode: 'text',
+              pythonPath: '/usr/bin/python3',
+              pythonOptions: ['-u'], // get print results in real-time
+              scriptPath: './Python',
+              args: [input]
+            };
+
+            var pyshell = new PythonShell(python_script, options);
+
+            pyshell.on('message', function (message) {
+              // received a message sent from the Python script (a simple "print" statement)
+              res.end(message);
+            });
+
+            pyshell.end(function (err,code,signal) {if (err) throw err;});
+        });
     }
 });
 

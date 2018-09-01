@@ -1,6 +1,8 @@
 from scipy import optimize as opt
 import numpy as np
 import math
+import json
+import sys
 
 POS_COST    = 60000 #1000000
 ANGLE_COST  = 6000  #80000
@@ -242,3 +244,30 @@ class path_finder(object):
             for s in np.arange(self.MIN, self.MAX + res, res):
                 ys.append(self.y(index, s))
         return (xs,ys)
+
+    def print_path(self):
+        xs, ys = self.draw_graph(0.01)
+        points = []
+        for i in range(len(xs)):
+            points.append({"x":xs[i], "y":ys[i]})
+        print(json.dumps(points))
+
+def main(data):
+    data = json.loads(data)
+    points = data["points"]
+    params = data["params"]
+
+    path_points = [point(path_point["x"], path_point["y"], path_point["heading"]) for path_point in points]
+    path = path_finder(*path_points)
+
+    path.update_poly(params.get("poly", 3))
+    POS_COST    = params.get("pos", 60000)
+    ANGLE_COST  = params.get("angle", 6000)
+    RADIUS_COST = params.get("radius", 50) 
+    RADIUS_CONT_COST = params.get("radius_cont", 10)
+    LENGTH_COST = params.get("length", 0)
+    path.find_scalars()
+    path.print_path()
+
+if __name__ == '__main__':
+    main(sys.argv[1])

@@ -103,15 +103,24 @@ function delete_point (elem) {
 
 function solve() {
   var points_elements = document.getElementsByClassName("point");
-  var pointints = [];
+  var points = [];
   for (var i = 0; i < points_elements.length; i++) {
     var point = {};
-    point["x"] = points_elements[i].querySelectorAll('.x > input')[0].value;
-    point["y"] = points_elements[i].querySelectorAll('.y > input')[0].value;
-    point["heading"] = points_elements[i].querySelectorAll('.heading > input')[0].value;
+    point["x"] = Number(points_elements[i].querySelectorAll('.x > input')[0].value);
+    point["y"] = Number(points_elements[i].querySelectorAll('.y > input')[0].value);
+    point["heading"] = Number(points_elements[i].querySelectorAll('.heading > input')[0].value);
     point["reverse"] = points_elements[i].querySelectorAll('.reverse > input:checked').value;
     points.push(point);
   }
-  var data = JSON.stringify(points);
-  $.post("http://127.0.0.1:3000/", {params: data}, function(){});
+  var params = {}
+  params["poly"] = Number(document.getElementById("polinum").value);
+  params["pos"] = Number(document.getElementById("position").value);
+  params["angle"] = Number(document.getElementById("angle").value);
+  params["radius"] = Number(document.getElementById("radius").value);
+  params["radius_cont"] = Number(document.getElementById("radius_cont").value);
+  params["length"] = Number(document.getElementById("length").value);
+
+  var data = {"params": params, "points":points}
+  var data = JSON.stringify(data);
+  $.post("http://127.0.0.1:3000/", {"data": data}, function(data, status){console.log(data)});
 }
