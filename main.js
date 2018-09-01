@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
+const python_script = "./func.py";
+var data = "aa";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -41,7 +43,6 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  app.post('SOLVE', SOLVE(req, res))
 
   if (mainWindow === null) {
     createWindow()
@@ -51,13 +52,22 @@ app.on('activate', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-function SOLVE(req, res) {
-  res.render('SOLVE', {})
-}
+const http = require('http');
+const server = http.createServer((req, res) => {
+    if (req.method === 'POST') {
+        // Handle post info...
+        var PythonShell = require('python-shell');
+        var pyshell = new PythonShell(python_script);
+        pyshell.send('hello');
 
-//app.set('views', './views');
-//app.set('view engine', 'mustache');
-//app.register(".mustache", require('stache'));
-//app.use(express.static(__dirname + '/public'));
+        pyshell.on('message', function (message) {
+          // received a message sent from the Python script (a simple "print" statement)
+          //console.log(message);
+          res.end(data);
+        });
 
+        pyshell.end(function (err,code,signal) {if (err) throw err;});
+    }
+});
 
+server.listen(3000);

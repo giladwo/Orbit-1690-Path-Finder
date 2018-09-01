@@ -103,7 +103,7 @@ function delete_point (elem) {
 
 function solve() {
   var points_elements = document.getElementsByClassName("point");
-  var points = [];
+  var pointints = [];
   for (var i = 0; i < points_elements.length; i++) {
     var point = {};
     point["x"] = points_elements[i].querySelectorAll('.x > input')[0].value;
@@ -113,5 +113,5 @@ function solve() {
     points.push(point);
   }
   var data = JSON.stringify(points);
-  $.post("SOLVE", {params: data}, function(){});
+  $.post("http://127.0.0.1:3000/", {params: data}, function(){});
 }
