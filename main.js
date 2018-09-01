@@ -41,6 +41,8 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
+  app.post('SOLVE', SOLVE(req, res))
+
   if (mainWindow === null) {
     createWindow()
   }
@@ -48,3 +50,14 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+function SOLVE(req, res) {
+  res.render('SOLVE', {})
+}
+
+//app.set('views', './views');
+//app.set('view engine', 'mustache');
+//app.register(".mustache", require('stache'));
+//app.use(express.static(__dirname + '/public'));
+
+

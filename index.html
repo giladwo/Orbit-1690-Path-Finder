@@ -57,7 +57,7 @@
 
         <div class="col-md-2">
             <div class="panel-body" style="text-align: center;">
-                    <a class="btn btn-danger" onclick="update_graph()"><i class="glyphicon glyphicon-fire"></i> SOLVE</a>
+                    <a class="btn btn-danger" onclick="solve()"><i class="glyphicon glyphicon-fire"></i> SOLVE</a>
             </div>
         </div>
         
@@ -77,23 +77,23 @@
                             <th>Reverse</th>
                         </thead>
                         <tbody  id="points">
-                            <tr class="point move-cursor">
+                            <tr class="point move-cursor" class="point">
                                 <!-- <td><i class="glyphicon glyphicon-minus" style="float: left; padding-top: 7px; color: #8c8c8c; margin-right: 10px"></i></td> -->   
                                 <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()"></td>
                                 <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()"></td>
                                 <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()"></td>
-                                <td class='reverse'><label class="toggle"><input type="checkbox" checked><span class="handle"></span></label></td>
+                                <td class='reverse'><label class="toggle"><input type="checkbox" value="true" checked><span class="handle"></span></label></td>
                                 <td class='delete'><a class="btn btn-danger btn-small"
                                     onclick='delete_point(this)'>
                                     <i class="glyphicon glyphicon-trash glyphicon-small"></i>
                                     </a></td> 
                             </tr>
-                            <tr class="point move-cursor">
+                            <tr class="point move-cursor" class="point">
                                 <!-- <td><i class="glyphicon glyphicon-minus" style="float: left; padding-top: 7px; color: #8c8c8c; margin-right: 10px"></i></td> -->   
                                 <td class='x'><input class="form-control form-control-small" type='number' placeholder="X" oninput="update_graph()"></td>
                                 <td class='y'><input class="form-control form-control-small" type='number' placeholder="Y" oninput="update_graph()"></td>
                                 <td class='heading'><input class="form-control form-control-small" type='number' placeholder="α" oninput="update_graph()"></td>
-                                <td class='reverse'><label class="toggle"><input type="checkbox" checked><span class="handle"></span></label></td>
+                                <td class='reverse'><label class="toggle"><input type="checkbox" value="true" checked><span class="handle"></span></label></td>
                                 <td class='delete'><a class="btn btn-danger btn-small"
                                     onclick='delete_point(this)'>
                                     <i class="glyphicon glyphicon-trash glyphicon-small"></i>
@@ -107,8 +107,9 @@
             </div>
         </div>
     </div>
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <!-- Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
         <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script type="text/javascript"> $('#points').sortable(); </script>
@@ -118,6 +119,6 @@
         <script src="https://bootflat.github.io/bootflat/js/icheck.min.js"></script>
         <script src="https://bootflat.github.io/bootflat/js/jquery.fs.selecter.min.js"></script>
         <script src="https://bootflat.github.io/bootflat/js/jquery.fs.stepper.min.js"></script>
- 
+        <script>if (window.module) module = window.module;</script>
     </body>
 </html>

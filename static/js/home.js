@@ -85,11 +85,11 @@ chart.render(); }
 window.onload = update_graph();
 
 function add_point () {
-  $('#points').append("<tr class='point move-cursor'>"+
+  $('#points').append("<tr class='point move-cursor' class='point'>"+
     "<td class='x'><input class='form-control form-control-small' type='number' placeholder='X' oninput='update_graph()'></td>"+
     "<td class='y'><input class='form-control form-control-small' type='number' placeholder='Y' oninput='update_graph()'></td>"+
     "<td class='heading'><input class='form-control form-control-small' type='number' placeholder='α' oninput='update_graph()'></td>"+
-    "<td class='reverse'><label class='toggle'><input type='checkbox' checked><span class='handle'></span></label></td>"+
+    "<td class='reverse'><label class='toggle'><input type='checkbox' value='true' checked><span class='handle'></span></label></td>"+
     "<td class='delete'><a class='btn btn-danger btn-small' onclick='delete_point(this)'>"+
     "<i class='glyphicon glyphicon-trash glyphicon-small'></i>"+
     "</a></td>"+
@@ -99,4 +99,19 @@ function add_point () {
 function delete_point (elem) {
   $(elem).parent().parent().remove();
   update_graph();
+}
+
+function solve() {
+  var points_elements = document.getElementsByClassName("point");
+  var points = [];
+  for (var i = 0; i < points_elements.length; i++) {
+    var point = {};
+    point["x"] = points_elements[i].querySelectorAll('.x > input')[0].value;
+    point["y"] = points_elements[i].querySelectorAll('.y > input')[0].value;
+    point["heading"] = points_elements[i].querySelectorAll('.heading > input')[0].value;
+    point["reverse"] = points_elements[i].querySelectorAll('.reverse > input:checked').value;
+    points.push(point);
+  }
+  var data = JSON.stringify(points);
+  $.post("SOLVE", {params: data}, function(){});
 }
