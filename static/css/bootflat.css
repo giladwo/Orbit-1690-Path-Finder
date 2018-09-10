@@ -2675,7 +2675,11 @@ a.list-group-item-danger.active, a.list-group-item-danger:hover, a.list-group-it
 /*# sourceMappingURL=bootflat.css.map */
 
 /*Path Finder Adds
------------------------ */
+/*----------------*/
+
+.solve-group {
+  margin-bottom: 20px;
+}
 
 .move-cursor {
   cursor: move;

@@ -19,6 +19,18 @@ const path_size  = 1;
 const real_field_width  = 16; //Meters
 const real_field_height = 8; //Meters
 
+function get_mouse_pos (canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {x: evt.clientX - rect.left, y: evt.clientY - rect.top};
+}
+
+function in_range (pos0, pos1, radius) {
+  if (Math.sqrt((pos0["x"]-pos1["x"])^2 + (pos0["y"]-pos1["y"])^2) < radius) {
+    return true;
+  } 
+  return false;
+}
+
 function get_data () {
   return(parsed_data[data_version]);
 }
@@ -117,7 +129,6 @@ function draw_path (points){
     ctx.fill();
   }
 
-
   ctx.closePath();
 }
 
@@ -139,15 +150,18 @@ function init_field() {
 
   ctx = field_canvas.getContext('2d');
   field_img = new Image;
+  
   field_img.onload = function() {
     ctx.drawImage(field_img, 0, 0, field_img.width, field_img.height, 0, 0, field_canvas.width, field_canvas.height);
     ctx.shadowColor = '#101010';
     ctx.shadowBlur = 10;
     draw_points(get_points());
   };
+
   field_img.src = 'static/img/field_background.png';
   pixel_meters = field_canvas.width/real_field_width;
 }
+
 
 function draw_field() {
     ctx.drawImage(field_img, 0, 0, field_img.width, field_img.height, 0, 0, field_canvas.width, field_canvas.height);
@@ -157,6 +171,7 @@ function draw_field() {
       draw_path(get_data()[i]["path_points"]);
     }
     
+    document.getElementById("version-header").innerHTML = data_version + " / " + (parsed_data.length-1)
     ctx.shadowBlur = 10;
     draw_points(get_points());
 }
@@ -220,9 +235,6 @@ function add_point () {
     "</tr>");
   
   reset_data();
-  //----------temporary!!!---------------
-  //data_version = 0;
-  //parsed_data = [default_data];
 }
 
 function delete_point (elem) {
@@ -230,7 +242,6 @@ function delete_point (elem) {
   
   reset_data();
 }
-
 
 function solve() {
   var points = get_points();
