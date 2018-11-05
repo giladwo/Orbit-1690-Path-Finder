@@ -102,3 +102,17 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+node_modules/.bin/electron
+*.cmd
+node_modules/.bin/extract-zip
+
+\.idea/inspectionProfiles/
+
+\.idea/
+
+# External node modules
+node_modules/
+
+# Vi[m] backups
+*~
+*.swp
