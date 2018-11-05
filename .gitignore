@@ -110,20 +110,9 @@ node_modules/.bin/extract-zip
 
 \.idea/
 
-node_modules/moment/src/locale/
+# External node modules
+node_modules/
 
-node_modules/moment/locale/
-
-node_modules/chart\.js/
-
-node_modules/chartjs-color-string/
-
-node_modules/color-convert/
-
-node_modules/color-name/
-
-node_modules/moment/
-
-node_modules/chartjs-color/
-
-\.vscode/settings\.json
+# Vi[m] backups
+*~
+*.swp
